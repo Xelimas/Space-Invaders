@@ -4,12 +4,12 @@ import javax.swing.JFrame;
 
 import ressources.Constantes;
 
-public class spaceInvadersMain {
+public class spaceInvadersMain{
 
     public static Scene scene;
         
     
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args)throws Exception {
         // création de la fenêtre de l'application
         JFrame fenetre = new JFrame("Space Invaders");
         fenetre.setSize(Constantes.LARGEUR_FENETRE, Constantes.HAUTEUR_FENETRE);
@@ -21,5 +21,10 @@ public class spaceInvadersMain {
         scene = new Scene();
         fenetre.setContentPane(scene);
         fenetre.setVisible(true);
+
+        
     }
+
+
+
 }

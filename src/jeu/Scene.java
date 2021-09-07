@@ -5,6 +5,9 @@ import javax.swing.JPanel;
 import entites.Vaisseau;
 
 import java.awt.*;
+
+import ressources.Chrono;
+import ressources.Clavier;
 import ressources.Constantes;
 
 public class Scene extends JPanel {
@@ -12,12 +15,22 @@ public class Scene extends JPanel {
 /**** VARIABLES ****/
 
     public Vaisseau vaisseau = new Vaisseau();
-
+    
+    
 /**** CONSTRUCTEUR ****/
 
 public Scene() {
     super();
+
+    this.setFocusable(true);
+    this.requestFocusInWindow();
+    this.addKeyListener(new Clavier());
+    Thread chronoEcran = new Thread(new Chrono());
+    chronoEcran.start();
 }
+
+
+
 
 
 /**** METHODES ****/
@@ -34,7 +47,8 @@ public void paintComponent(Graphics g) {
     g2.fillRect(30, 530, 535, 5);
 
     // Dessin du vaisseau
-    g2.drawImage(this.vaisseau.getImg(), this.vaisseau.getxPos(), this.vaisseau.getyPos(), null);
+    g2.drawImage(this.vaisseau.getImg(), this.vaisseau.deplacementVaisseau(), this.vaisseau.getyPos(), null);
+
 }
 
 }

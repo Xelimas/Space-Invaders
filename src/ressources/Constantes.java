@@ -19,4 +19,7 @@ public abstract class Constantes {
 
     // unité de déplacement du vaisseau
     public static final int DX_VAISSEAU = 1;
+    
+    public static final int LIMITE_GAUCHE_VAISSEAU = 60;
+    public static final int LIMITE_DROITE_VAISSEAU = 500;
 }
