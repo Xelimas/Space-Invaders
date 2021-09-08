@@ -1,5 +1,6 @@
 package entites;
 
+import java.awt.Graphics;
 import javax.swing.ImageIcon;
 
 import ressources.Constantes;
@@ -45,5 +46,9 @@ public class Vaisseau extends Entite {
                 }
             }
         return this.xPos;
+    }
+
+    public void dessinVaisseau(Graphics g) {
+        g.drawImage(this.img, this.deplacementVaisseau(), this.yPos, null);
     }
 }

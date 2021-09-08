@@ -49,7 +49,7 @@ public void paintComponent(Graphics g) {
     g2.fillRect(30, 530, 535, 5);
 
     // Dessin du vaisseau
-    g2.drawImage(this.vaisseau.getImg(), this.vaisseau.deplacementVaisseau(), this.vaisseau.getyPos(), null);
+    this.vaisseau.dessinVaisseau(g2);
 
     // Dessin du groupe d'aliens
     this.groupeAliens.dessinAliens(g2);

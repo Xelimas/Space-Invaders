@@ -34,7 +34,8 @@ public abstract class Constantes {
     public final static int ECART_COLONNES_ALIEN = 10;
 
     // Unité de déplacement de l'alien
-    public final static int DX_ALIEN = 5;
-    public final static int DY_ALIEN = 25;
+    public final static int DX_ALIEN = 2;
+    public final static int DY_ALIEN = 20;
+    public final static int VITESSE_ALIEN = 1;
 
 }
