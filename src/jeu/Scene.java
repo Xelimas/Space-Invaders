@@ -58,6 +58,9 @@ public void paintComponent(Graphics g) {
 
     // Dessin du tir du vaisseau
     this.tirVaisseau.dessinTirVaisseau(g2);
+
+    // détection contact tirVaisseau avec alien
+    this.groupeAliens.tirVaisseauToucheAlien(this.tirVaisseau);
 }
 
 }

@@ -10,6 +10,8 @@ public class GroupeAliens {
     private boolean vaADroite, pos1;
     private int vitesse;
 
+    private int[] tabAlienMort = { -1, -1 }; // Emplacement alien mort dans le tableau aliens
+
     public GroupeAliens() {
         this.initTableauAlien();
         this.vaADroite = true;
@@ -47,9 +49,11 @@ public class GroupeAliens {
         }
         for (int colonne = 0; colonne < 10; colonne++) {
             for (int ligne = 0; ligne < 5; ligne++) {
-                this.tabAlien[ligne][colonne].choixImage(pos1);
-                g.drawImage(this.tabAlien[ligne][colonne].getImg(), this.tabAlien[ligne][colonne].getxPos(),
-                        this.tabAlien[ligne][colonne].getyPos(), null);
+                if (this.tabAlien[ligne][colonne] != null) {
+                    this.tabAlien[ligne][colonne].choixImage(pos1);
+                    g.drawImage(this.tabAlien[ligne][colonne].getImg(), this.tabAlien[ligne][colonne].getxPos(),
+                            this.tabAlien[ligne][colonne].getyPos(), null);
+                }
             }
         }
 
@@ -60,9 +64,11 @@ public class GroupeAliens {
         boolean reponse = false;
         for (int colonne = 0; colonne < 10; colonne++) {
             for (int ligne = 0; ligne < 5; ligne++) {
-                if (this.tabAlien[ligne][colonne].getxPos() < Constantes.MARGE_FENETRE) {
-                    reponse = true;
-                    break;
+                if (this.tabAlien[ligne][colonne] != null) {
+                    if (this.tabAlien[ligne][colonne].getxPos() < Constantes.MARGE_FENETRE) {
+                        reponse = true;
+                        break;
+                    }
                 }
             }
         }
@@ -74,10 +80,12 @@ public class GroupeAliens {
         boolean reponse = false;
         for (int colonne = 0; colonne < 10; colonne++) {
             for (int ligne = 0; ligne < 5; ligne++) {
-                if (this.tabAlien[ligne][colonne].getxPos() > Constantes.LARGEUR_FENETRE - Constantes.LARGEUR_ALIEN
-                        - Constantes.DX_ALIEN - Constantes.MARGE_FENETRE) {
-                    reponse = true;
-                    break;
+                if (this.tabAlien[ligne][colonne] != null) {
+                    if (this.tabAlien[ligne][colonne].getxPos() > Constantes.LARGEUR_FENETRE - Constantes.LARGEUR_ALIEN
+                            - Constantes.DX_ALIEN - Constantes.MARGE_FENETRE) {
+                        reponse = true;
+                        break;
+                    }
                 }
             }
         }
@@ -89,8 +97,10 @@ public class GroupeAliens {
         if (this.toucheBordDroit() == true) {
             for (int colonne = 0; colonne < 10; colonne++) {
                 for (int ligne = 0; ligne < 5; ligne++) {
-                    this.tabAlien[ligne][colonne]
-                            .setyPos(this.tabAlien[ligne][colonne].getyPos() + Constantes.DY_ALIEN);
+                    if (this.tabAlien[ligne][colonne] != null) {
+                        this.tabAlien[ligne][colonne]
+                                .setyPos(this.tabAlien[ligne][colonne].getyPos() + Constantes.DY_ALIEN);
+                    }
                 }
             }
             this.vaADroite = false;
@@ -101,8 +111,10 @@ public class GroupeAliens {
             if (this.toucheBordGauche() == true) {
                 for (int colonne = 0; colonne < 10; colonne++) {
                     for (int ligne = 0; ligne < 5; ligne++) {
-                        this.tabAlien[ligne][colonne]
-                                .setyPos(this.tabAlien[ligne][colonne].getyPos() + Constantes.DY_ALIEN);
+                        if (this.tabAlien[ligne][colonne] != null) {
+                            this.tabAlien[ligne][colonne]
+                                    .setyPos(this.tabAlien[ligne][colonne].getyPos() + Constantes.DY_ALIEN);
+                        }
                     }
                 }
                 this.vaADroite = true;
@@ -114,19 +126,28 @@ public class GroupeAliens {
     }
 
     public void deplacementAliens() {
+        if (this.tabAlienMort[0] != -1) { // élimination de l'alien mort si nécessaire
+            elimineAlienMort(tabAlienMort);
+            tabAlienMort[0] = -1; // réinitialisation du tableau d'alien mort
+        }
         if (this.vaADroite == true) {
             for (int colonne = 0; colonne < 10; colonne++) {
                 for (int ligne = 0; ligne < 5; ligne++) {
-                    this.tabAlien[ligne][colonne]
-                            .setxPos(this.tabAlien[ligne][colonne].getxPos() + Constantes.DX_ALIEN);
+                    if (this.tabAlien[ligne][colonne] != null) {
+                        this.tabAlien[ligne][colonne]
+                                .setxPos(this.tabAlien[ligne][colonne].getxPos() + Constantes.DX_ALIEN);
+                    }
                 }
             }
         } else {
             for (int colonne = 0; colonne < 10; colonne++) {
                 for (int ligne = 0; ligne < 5; ligne++) {
-                    this.tabAlien[ligne][colonne]
-                            .setxPos(this.tabAlien[ligne][colonne].getxPos() - Constantes.DX_ALIEN);
+                    if (this.tabAlien[ligne][colonne] != null) {
+                        this.tabAlien[ligne][colonne]
+                                .setxPos(this.tabAlien[ligne][colonne].getxPos() - Constantes.DX_ALIEN);
+                    }
                 }
+
             }
         }
         if (this.pos1 == true) {
@@ -135,6 +156,29 @@ public class GroupeAliens {
             this.pos1 = true;
         }
         this.alienTourneEtDescend();
+    }
+
+    // Détection contact du tir du vaisseau avec l'alien
+    public void tirVaisseauToucheAlien(TirVaisseau tirVaisseau) {
+        for (int colonne = 0; colonne < 10; colonne++) {
+            for (int ligne = 0; ligne < 5; ligne++) {
+                if (this.tabAlien[ligne][colonne] != null) {
+                    if (tirVaisseau.tueAlien(this.tabAlien[ligne][colonne]) == true) {
+                        this.tabAlien[ligne][colonne].vivant = false; // on tue l'alien
+                        tirVaisseau.yPos = -1; // on fait disparaitre le tir
+                        // on enregistre la position de l'alien mort ds le tableau
+                        this.tabAlienMort[0] = ligne;
+                        this.tabAlienMort[1] = colonne;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    // Méthode qui enlève l'alien mort du tableau (case à null)
+    private void elimineAlienMort(int[] tabAlienMort) {
+        this.tabAlien[tabAlienMort[0]][tabAlienMort[1]] = null;
     }
 
 }

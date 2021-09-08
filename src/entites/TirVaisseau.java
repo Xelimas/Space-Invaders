@@ -5,11 +5,11 @@ import javax.swing.ImageIcon;
 
 import ressources.Constantes;
 
-public class TirVaisseau extends Entite{
-    
+public class TirVaisseau extends Entite {
+
     /**** VARIABLES ****/
 
-private boolean vaisseauTire = false;
+    private boolean vaisseauTire = false;
 
     /**** CONSTRUCTEUR ****/
     public TirVaisseau() {
@@ -34,23 +34,37 @@ private boolean vaisseauTire = false;
 
     /**** METHODES ****/
 
-    
-    public boolean isVaisseauTire() {return vaisseauTire;}
+    public boolean isVaisseauTire() {
+        return vaisseauTire;
+    }
 
-    
-    public void setVaisseauTire(boolean vaisseauTire) {this.vaisseauTire = vaisseauTire;}
+    public void setVaisseauTire(boolean vaisseauTire) {
+        this.vaisseauTire = vaisseauTire;
+    }
 
     public int deplacementTirVaisseau() {
-        if(this.vaisseauTire == true) {
-            if(this.yPos > 0) {this.yPos = this.yPos - Constantes.DY_TIR_VAISSEAU;}
-            else{this.vaisseauTire = false;}
+        if (this.vaisseauTire == true) {
+            if (this.yPos > 0) {
+                this.yPos = this.yPos - Constantes.DY_TIR_VAISSEAU;
+            } else {
+                this.vaisseauTire = false;
+            }
         }
         return yPos;
     }
 
     public void dessinTirVaisseau(Graphics g) {
-        if(this.vaisseauTire == true) {
+        if (this.vaisseauTire == true) {
             g.drawImage(this.img, this.xPos, this.deplacementTirVaisseau(), null);
+        }
+    }
+
+    public boolean tueAlien(Alien alien) {
+        if (this.yPos < alien.getyPos() + alien.getHauteur() && this.yPos + this.hauteur > alien.getyPos()
+                && this.xPos + this.largeur > alien.getxPos() && this.xPos < alien.getxPos() + alien.getLargeur()) {
+            return true;
+        } else {
+            return false;
         }
     }
 }
