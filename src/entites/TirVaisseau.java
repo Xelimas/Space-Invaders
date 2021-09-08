@@ -119,11 +119,11 @@ public class TirVaisseau extends Entite {
         return tabRep;
     }
 
-    public void tirVaisseauDetruitChateau(Chateau tabChateau[]) {
+    public void tirVaisseauDetruitChateau(Chateau tabChateaux[]) {
         int[] tab = this.tirVaisseauToucheChateau(); // Contient (-1,-1) ou le numéro du château touché
         if (tab[0] != -1) { // un château est touché
-            if (tabChateau[tab[0]].trouveBrique(tabChateau[tab[0]].trouveColonneChateau(tab[1])) != -1) {
-                tabChateau[tab[0]].casseBriques(tab[1]); // Détruit les briques du château touché
+            if (tabChateaux[tab[0]].trouveBrique(tabChateaux[tab[0]].trouveColonneChateau(tab[1])) != -1) {
+                tabChateaux[tab[0]].casseBriques(tab[1]); // Détruit les briques du château touché
                 this.yPos = -1; // On fait disparaitre le tir et on réactive le canon du vaisseau
             }
         }

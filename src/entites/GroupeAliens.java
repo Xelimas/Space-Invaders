@@ -195,7 +195,7 @@ public class GroupeAliens {
     // colonne (ligne, colonne)
     public int[] choixAlienQuiTire() {
         int positionAlien[] = { -1, -1 };
-        if (this.nombreAliens != 0) { // on vérifie qu'il reste des aliens vivants}
+        if (this.nombreAliens != 0) { // on vérifie qu'il reste des aliens vivants
             do {
                 int colonne = hasard.nextInt(10); // On tire au hasard des aliens vivants
                 // tableau des aliens

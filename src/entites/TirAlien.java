@@ -51,6 +51,69 @@ public class TirAlien extends Entite {
     }
 
     public void dessinTirAlien(Graphics g) {
-        g.drawImage(this.img, this.xPos,this.deplacementTirAlien(), null);
+        g.drawImage(this.img, this.xPos, this.deplacementTirAlien(), null);
     }
+
+    // Renvoie vrai si le tir de l'alien est à hauteur des châteaux
+    private boolean tirAlienAHauteurDeChateau() {
+        if (this.yPos < Constantes.Y_POS_CHATEAU + Constantes.HAUTEUR_CHATEAU
+                && this.yPos + this.hauteur > Constantes.Y_POS_CHATEAU) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Renvoie le numéro du château (0,1,2 ou 3) dans la zone de tir du vaisseau
+    private int chateauProcheAlien() {
+        int numeroChateau = -1;
+        int colonne = -1;
+        while (numeroChateau == -1 && colonne < 4) {
+            colonne++;
+            if (this.xPos + this.largeur - 1 > Constantes.MARGE_FENETRE + Constantes.X_POS_INIT_CHATEAU
+                    + colonne * (Constantes.LARGEUR_CHATEAU + Constantes.ECART_CHATEAU)
+                    && this.xPos + 1 < Constantes.MARGE_FENETRE + Constantes.X_POS_INIT_CHATEAU
+                            + Constantes.LARGEUR_CHATEAU
+                            + colonne * (Constantes.LARGEUR_CHATEAU + Constantes.ECART_CHATEAU)) {
+                numeroChateau = colonne;
+            }
+        }
+        return numeroChateau;
+    }
+
+    // Renvoie l'abscisse du tir de l'alien lors du contact avec un château
+    private int abscisseContactTirAlienChateau(Chateau chateau) {
+        int xPosTirAlien = -1;
+        if (this.xPos + this.largeur > chateau.getxPos()
+                && this.xPos < chateau.getxPos() + Constantes.LARGEUR_CHATEAU) {
+            xPosTirAlien = this.xPos;
+        }
+        return xPosTirAlien;
+    }
+
+    // Renvoie numéro château touché et abscisse du tir
+    public int[] tirAlienToucheChateau() {
+        int[] tabRep = { -1, -1 };
+        if (this.tirAlienAHauteurDeChateau() == true) { // le tir est à hauteur du château
+            tabRep[0] = this.chateauProcheAlien(); // enregistre le numéro du château touché dans tabRep[1]
+            if (tabRep[0] != -1) {
+                // Enregistre l'abscisse du tir du vaisseau lors du contact avec le château dans
+                // tabRep[1]
+                tabRep[1] = this.abscisseContactTirAlienChateau(spaceInvadersMain.scene.tabChateaux[tabRep[0]]);
+            }
+        }
+        return tabRep;
+    }
+
+    public void tirAlienDetruitChateau(Chateau tabChateaux[]) {
+        int[] tab = this.tirAlienToucheChateau(); // Contient (-1,-1) ou le numéro du château touché
+        if (tab[0] != -1) { // un château est touché
+            if (tabChateaux[tab[0]].trouveBriqueHaut(tabChateaux[tab[0]].trouveColonneChateau(tab[1])) != -1
+                    && tabChateaux[tab[0]].trouveBriqueHaut(tabChateaux[tab[0]].trouveColonneChateau(tab[1])) != 27) {
+                tabChateaux[tab[0]].casseBriquesHaut(tab[1]); // Détruit les briques du château touché
+                this.yPos = 700; // On fait disparaitre le tir et on réactive le canon du vaisseau
+            }
+        }
+    }
+
 }
