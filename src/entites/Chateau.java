@@ -1,6 +1,5 @@
 package entites;
 
-
 import ressources.Constantes;
 
 import java.awt.Color;
@@ -96,4 +95,42 @@ public class Chateau extends Entite {
             }
         }
     }
+
+    // Trouve la colonne du tableau associé au château touché par le tir
+    public int trouveColonneChateau(int xMissile) {
+        int colonne = -1;
+        colonne = (xMissile - this.xPos) / Constantes.DIMENSION_BRIQUE;
+        return colonne;
+    }
+
+    // trouve la première brique en partant du bas de la colonne du tableau au
+    // château ou renvoie -1
+    public int trouveBrique(int colonne) {
+        int ligne = NBRE_LIGNES - 1;
+        while (ligne >= 0 && tabChateau[ligne][colonne] == false) {
+            ligne--;
+        }
+        return ligne;
+    }
+
+    // elimination des 6 premières briques de la colonnes en partant du bas
+    // si elle existent
+    private void enleveBriques(int ligne, int colonne) {
+        for (int compteur = 0; compteur < 6; compteur++) {
+            if (ligne - compteur >= 0) {
+                tabChateau[ligne - compteur][colonne] = false;
+                if (colonne < NBRE_COLONNES - 1) {
+                    tabChateau[ligne - compteur][colonne + 1] = false;
+                }
+            }
+        }
+
+    }
+
+    // récapitule les 3 méthodes qui précédent
+    public void casseBriques(int xTir) {
+        int colonne = this.trouveColonneChateau(xTir);
+        this.enleveBriques(trouveBrique(colonne), colonne);
+    }
+
 }

@@ -20,7 +20,7 @@ public class Scene extends JPanel {
     public Vaisseau vaisseau = new Vaisseau();
     public GroupeAliens groupeAliens = new GroupeAliens();
     public TirVaisseau tirVaisseau = new TirVaisseau();
-    private Chateau tabChateaux[] = new Chateau[4];
+    public Chateau tabChateaux[] = new Chateau[4];
 
     /**** CONSTRUCTEUR ****/
 
@@ -69,6 +69,9 @@ public class Scene extends JPanel {
         for (int colonne = 0; colonne < 4; colonne++) {
             this.tabChateaux[colonne].dessinChateau(g2);
         }
+
+        // Détection contact du tir du vaisseau avec le château
+        this.tirVaisseau.tirVaisseauDetruitChateau(tabChateaux);
     }
 
 }
