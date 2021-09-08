@@ -2,6 +2,7 @@ package jeu;
 
 import javax.swing.JPanel;
 
+import entites.GroupeAliens;
 import entites.Vaisseau;
 
 import java.awt.*;
@@ -15,6 +16,7 @@ public class Scene extends JPanel {
 /**** VARIABLES ****/
 
     public Vaisseau vaisseau = new Vaisseau();
+    public GroupeAliens groupeAliens = new GroupeAliens();
     
     
 /**** CONSTRUCTEUR ****/
@@ -48,6 +50,9 @@ public void paintComponent(Graphics g) {
 
     // Dessin du vaisseau
     g2.drawImage(this.vaisseau.getImg(), this.vaisseau.deplacementVaisseau(), this.vaisseau.getyPos(), null);
+
+    // Dessin du groupe d'aliens
+    this.groupeAliens.dessinAliens(g2);
 
 }
 
