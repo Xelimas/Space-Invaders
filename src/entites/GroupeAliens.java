@@ -6,12 +6,15 @@ import ressources.Chrono;
 import ressources.Constantes;
 
 public class GroupeAliens {
+
+    /**** VARIABLES ****/
     private Alien tabAlien[][] = new Alien[5][10];
     private boolean vaADroite, pos1;
     private int vitesse;
 
     private int[] tabAlienMort = { -1, -1 }; // Emplacement alien mort dans le tableau aliens
 
+    /**** CONSTRUCTEUR ****/
     public GroupeAliens() {
         this.initTableauAlien();
         this.vaADroite = true;
@@ -19,6 +22,7 @@ public class GroupeAliens {
         this.vitesse = Constantes.VITESSE_ALIEN;
     }
 
+     /**** METHODES ****/
     private void initTableauAlien() {
         for (int colonne = 0; colonne < 10; colonne++) {
             this.tabAlien[0][colonne] = new Alien(

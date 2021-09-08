@@ -47,4 +47,17 @@ public abstract class Constantes {
 
     // Unité de déplacement du tir
     public final static int DY_TIR_VAISSEAU = 2;
+
+    /******************************** CHATEAU ********************************/
+    // Dimension de la brique
+    public final static int DIMENSION_BRIQUE = 2;
+
+    // Dimension du château (multiple des dimensions de la brique)
+    public final static int LARGEUR_CHATEAU = 72;
+    public final static int HAUTEUR_CHATEAU = 54;
+
+    // Paramètres de position des châteaux
+    public final static int Y_POS_CHATEAU = 400;
+    public final static int X_POS_INIT_CHATEAU = 39;
+    public final static int ECART_CHATEAU = 42;
 }
