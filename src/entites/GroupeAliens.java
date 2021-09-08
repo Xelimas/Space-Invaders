@@ -1,6 +1,7 @@
 package entites;
 
 import java.awt.Graphics;
+import java.util.Random;
 
 import ressources.Chrono;
 import ressources.Constantes;
@@ -14,6 +15,10 @@ public class GroupeAliens {
 
     private int[] tabAlienMort = { -1, -1 }; // Emplacement alien mort dans le tableau aliens
 
+    Random hasard = new Random();
+
+    private int nombreAliens = Constantes.NOMBRE_ALIENS;
+
     /**** CONSTRUCTEUR ****/
     public GroupeAliens() {
         this.initTableauAlien();
@@ -22,7 +27,7 @@ public class GroupeAliens {
         this.vitesse = Constantes.VITESSE_ALIEN;
     }
 
-     /**** METHODES ****/
+    /**** METHODES ****/
     private void initTableauAlien() {
         for (int colonne = 0; colonne < 10; colonne++) {
             this.tabAlien[0][colonne] = new Alien(
@@ -183,6 +188,27 @@ public class GroupeAliens {
     // Méthode qui enlève l'alien mort du tableau (case à null)
     private void elimineAlienMort(int[] tabAlienMort) {
         this.tabAlien[tabAlienMort[0]][tabAlienMort[1]] = null;
+        this.nombreAliens--;
     }
 
+    // Renvoie la position d'un alien tiré au hasard dans le tableau en bas de sa
+    // colonne (ligne, colonne)
+    public int[] choixAlienQuiTire() {
+        int positionAlien[] = { -1, -1 };
+        if (this.nombreAliens != 0) { // on vérifie qu'il reste des aliens vivants}
+            do {
+                int colonne = hasard.nextInt(10); // On tire au hasard des aliens vivants
+                // tableau des aliens
+                for (int ligne = 4; ligne > 0; ligne--) {
+                    // En partant du bas
+                    if (tabAlien[ligne][colonne] != null) {
+                        positionAlien[0] = this.tabAlien[ligne][colonne].getxPos();
+                        positionAlien[1] = this.tabAlien[ligne][colonne].getyPos();
+                        break;
+                    }
+                }
+            } while (positionAlien[0] == -1);
+        }
+        return positionAlien;
+    }
 }

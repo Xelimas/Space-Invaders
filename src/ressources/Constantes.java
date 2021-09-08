@@ -40,6 +40,9 @@ public abstract class Constantes {
     public final static int DY_ALIEN = 20;
     public final static int VITESSE_ALIEN = 1;
 
+    // Nombre total alien
+    public final static int NOMBRE_ALIENS = 50;
+
     /******************************** TIR VAISSEAU ********************************/
     // Dimension du tir
     public final static int LARGEUR_TIR_VAISSEAU = 3;
@@ -60,4 +63,13 @@ public abstract class Constantes {
     public final static int Y_POS_CHATEAU = 400;
     public final static int X_POS_INIT_CHATEAU = 39;
     public final static int ECART_CHATEAU = 42;
+
+    /******************************** TIR ALIEN ********************************/
+    // Dimension du tir
+    public static final int LARGEUR_TIR_ALIEN = 5;
+    public static final int HAUTEUR_TIR_ALIEN = 15;
+
+    // Unité de déplacement du tir
+    public final static int DY_TIR_ALIEN = 3;
+
 }

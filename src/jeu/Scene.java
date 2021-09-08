@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 
 import entites.Chateau;
 import entites.GroupeAliens;
+import entites.TirAlien;
 import entites.TirVaisseau;
 import entites.Vaisseau;
 
@@ -21,6 +22,8 @@ public class Scene extends JPanel {
     public GroupeAliens groupeAliens = new GroupeAliens();
     public TirVaisseau tirVaisseau = new TirVaisseau();
     public Chateau tabChateaux[] = new Chateau[4];
+
+    public TirAlien tirAlien1, tirAlien2, tirAlien3;
 
     /**** CONSTRUCTEUR ****/
 
@@ -72,6 +75,28 @@ public class Scene extends JPanel {
 
         // Détection contact du tir du vaisseau avec le château
         this.tirVaisseau.tirVaisseauDetruitChateau(tabChateaux);
+
+        // Dessin des tirs des aliens
+        if (Chrono.compteTours % 500 == 0) {
+            tirAlien1 = new TirAlien(this.groupeAliens.choixAlienQuiTire());
+        }
+        if (this.tirAlien1 != null) {
+            this.tirAlien1.dessinTirAlien(g2);
+        }
+
+        if (Chrono.compteTours % 750 == 0) {
+            tirAlien2 = new TirAlien(this.groupeAliens.choixAlienQuiTire());
+        }
+        if (this.tirAlien2 != null) {
+            this.tirAlien2.dessinTirAlien(g2);
+        }
+
+        if (Chrono.compteTours % 900 == 0) {
+            tirAlien3 = new TirAlien(this.groupeAliens.choixAlienQuiTire());
+        }
+        if (this.tirAlien3 != null) {
+            this.tirAlien3.dessinTirAlien(g2);
+        }
     }
 
 }
