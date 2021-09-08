@@ -9,6 +9,7 @@ public abstract class Constantes {
 
 
 
+    /******************************** VAISSEAU ********************************/
     // Dimension du vaisseau
     public static final int LARGEUR_VAISSEAU = 39;
     public static final int HAUTEUR_VAISSEAU = 24;
@@ -23,6 +24,7 @@ public abstract class Constantes {
     public static final int LIMITE_GAUCHE_VAISSEAU = 60;
     public static final int LIMITE_DROITE_VAISSEAU = 500;
 
+    /******************************** ALIEN ********************************/
     // Dimension de l'alien
     public final static int LARGEUR_ALIEN = 33;
     public final static int HAUTEUR_ALIEN = 25;
@@ -38,4 +40,11 @@ public abstract class Constantes {
     public final static int DY_ALIEN = 20;
     public final static int VITESSE_ALIEN = 1;
 
+    /******************************** TIR VAISSEAU ********************************/
+    // Dimension du tir
+    public final static int LARGEUR_TIR_VAISSEAU = 3;
+    public final static int HAUTEUR_TIR_VAISSEAU = 13;
+
+    // Unité de déplacement du tir
+    public final static int DY_TIR_VAISSEAU = 2;
 }

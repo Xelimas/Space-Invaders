@@ -17,11 +17,19 @@ public class Clavier implements KeyListener{
 
     @Override
     public void keyPressed(java.awt.event.KeyEvent e) {
-        if (e.getKeyCode() == 68) {
+        if (e.getKeyCode() == 68) { // touche D (droite)
             spaceInvadersMain.scene.vaisseau.setDx(Constantes.DX_VAISSEAU);
         }
-        else if (e.getKeyCode() == 81) {
+        else if (e.getKeyCode() == 81) { // touche Q (gauche)
             spaceInvadersMain.scene.vaisseau.setDx(-Constantes.DX_VAISSEAU);
+        }
+        else if(e.getKeyCode() == 90) { // touche Z (tir du vaisseau)
+            if(spaceInvadersMain.scene.tirVaisseau.isVaisseauTire() == false) {
+                spaceInvadersMain.scene.tirVaisseau.setyPos(Constantes.Y_POS_VAISSEAU - Constantes.HAUTEUR_TIR_VAISSEAU);
+                spaceInvadersMain.scene.tirVaisseau.setxPos(spaceInvadersMain.scene.vaisseau.getxPos() + Constantes.LARGEUR_VAISSEAU/2 - 1);
+                spaceInvadersMain.scene.tirVaisseau.setVaisseauTire(true);
+
+            }
         }
         
     }
