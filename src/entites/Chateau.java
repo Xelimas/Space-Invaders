@@ -138,7 +138,7 @@ public class Chateau extends Entite {
     public int trouveBriqueHaut(int colonne) {
         int ligne = 0;
         if (colonne != -1) {
-            while (ligne <= NBRE_LIGNES && tabChateaux[ligne][colonne] == false) {
+            while (ligne < NBRE_LIGNES && tabChateaux[ligne][colonne] == false) {
                 ligne++;
             }
         }

@@ -7,6 +7,7 @@ import ressources.Constantes;
 public class spaceInvadersMain{
 
     public static Scene scene;
+    public static boolean jeu = true;
         
     
     public static void main(String[] args)throws Exception {

@@ -20,8 +20,8 @@ public class TirAlien extends Entite {
         // Initialisation des variables de la super classe
         super.xPos = tabPositionAlien[0] + Constantes.LARGEUR_ALIEN / 2 - 1;
         super.yPos = tabPositionAlien[1] + Constantes.HAUTEUR_ALIEN;
-        super.largeur = Constantes.LARGEUR_ALIEN;
-        super.hauteur = Constantes.HAUTEUR_ALIEN;
+        super.largeur = Constantes.LARGEUR_TIR_ALIEN;
+        super.hauteur = Constantes.HAUTEUR_TIR_ALIEN;
         super.dx = 0;
         super.dy = Constantes.DY_TIR_ALIEN;
 
@@ -65,7 +65,7 @@ public class TirAlien extends Entite {
     }
 
     // Renvoie le numéro du château (0,1,2 ou 3) dans la zone de tir du vaisseau
-    private int chateauProcheAlien() {
+    private int chateauProche() {
         int numeroChateau = -1;
         int colonne = -1;
         while (numeroChateau == -1 && colonne < 4) {
@@ -95,10 +95,10 @@ public class TirAlien extends Entite {
     public int[] tirAlienToucheChateau() {
         int[] tabRep = { -1, -1 };
         if (this.tirAlienAHauteurDeChateau() == true) { // le tir est à hauteur du château
-            tabRep[0] = this.chateauProcheAlien(); // enregistre le numéro du château touché dans tabRep[1]
+            tabRep[0] = this.chateauProche(); // enregistre le numéro du château touché dans tabRep[1]
             if (tabRep[0] != -1) {
                 // Enregistre l'abscisse du tir du vaisseau lors du contact avec le château dans
-                // tabRep[1]
+                // tabRep[0]
                 tabRep[1] = this.abscisseContactTirAlienChateau(spaceInvadersMain.scene.tabChateaux[tabRep[0]]);
             }
         }
@@ -113,6 +113,18 @@ public class TirAlien extends Entite {
                 tabChateaux[tab[0]].casseBriquesHaut(tab[1]); // Détruit les briques du château touché
                 this.yPos = 700; // On fait disparaitre le tir et on réactive le canon du vaisseau
             }
+        }
+    }
+
+    // renvoie vrai si un tir touche le vaisseau
+    public boolean toucheVaisseau(Vaisseau vaisseau) {
+        if (this.yPos < vaisseau.getyPos() + vaisseau.getHauteur() && this.yPos + this.hauteur > vaisseau.getyPos()
+                && this.xPos + this.largeur > vaisseau.getxPos()
+                && this.xPos < vaisseau.getxPos() + vaisseau.getLargeur()) {
+            this.yPos = 700;
+            return true;
+        } else {
+            return false;
         }
     }
 

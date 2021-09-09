@@ -8,7 +8,10 @@ import entites.TirAlien;
 import entites.TirVaisseau;
 import entites.Vaisseau;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import ressources.Chrono;
 import ressources.Clavier;
@@ -30,17 +33,20 @@ public class Scene extends JPanel {
     public Scene() {
         super();
 
-        this.setFocusable(true);
-        this.requestFocusInWindow();
-        this.addKeyListener(new Clavier());
-        Thread chronoEcran = new Thread(new Chrono());
-        chronoEcran.start();
-
         // instanciation des châteaux
         for (int colonne = 0; colonne < 4; colonne++) {
             this.tabChateaux[colonne] = new Chateau(Constantes.MARGE_FENETRE + Constantes.X_POS_INIT_CHATEAU
                     + colonne * (Constantes.LARGEUR_CHATEAU + Constantes.ECART_CHATEAU));
         }
+
+        this.setFocusable(true);
+        this.requestFocusInWindow();
+        this.addKeyListener(new Clavier());
+        
+        Thread chronoEcran = new Thread(new Chrono());
+        chronoEcran.start();
+
+        
     }
 
     /**** METHODES ****/
@@ -83,6 +89,7 @@ public class Scene extends JPanel {
         if (this.tirAlien1 != null) {
             this.tirAlien1.dessinTirAlien(g2);
             this.tirAlien1.tirAlienDetruitChateau(tabChateaux); // détection contact avec château
+            if(this.tirAlien1.toucheVaisseau(vaisseau) == true) {this.vaisseau.setVivant(false);}
         }
 
         if (Chrono.compteTours % 750 == 0) {
@@ -91,6 +98,7 @@ public class Scene extends JPanel {
         if (this.tirAlien2 != null) {
             this.tirAlien2.dessinTirAlien(g2);
             this.tirAlien2.tirAlienDetruitChateau(tabChateaux); // détection contact avec château
+            if(this.tirAlien2.toucheVaisseau(vaisseau) == true) {this.vaisseau.setVivant(false);}
         }
 
         if (Chrono.compteTours % 900 == 0) {
@@ -99,6 +107,7 @@ public class Scene extends JPanel {
         if (this.tirAlien3 != null) {
             this.tirAlien3.dessinTirAlien(g2);
             this.tirAlien3.tirAlienDetruitChateau(tabChateaux); // détection contact avec château
+            if(this.tirAlien3.toucheVaisseau(vaisseau) == true) {this.vaisseau.setVivant(false);}
         }
     }
 

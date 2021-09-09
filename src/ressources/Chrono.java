@@ -9,7 +9,7 @@ public class Chrono implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
+        while (spaceInvadersMain.jeu == true) {
             compteTours++;
             spaceInvadersMain.scene.repaint();
             try {
