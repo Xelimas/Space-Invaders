@@ -239,4 +239,24 @@ public class GroupeAliens {
         }
     }
 
+    public int getNombreAliens() {
+        return nombreAliens;
+    }
+
+    public int positionAlienLePlusBas() {
+        int posBas = 0, posBasFinal = 0;
+        for (int colonne = 1; colonne < 10; colonne++) {
+            for (int ligne = 4; ligne >= 0; ligne--) {
+                if (this.tabAlien[ligne][colonne] != null) {
+                    posBas = this.tabAlien[ligne][colonne].yPos + this.tabAlien[ligne][colonne].hauteur;
+                    break;
+                }
+            }
+            if (posBas > posBasFinal) {
+                posBasFinal = posBas;
+            }
+        }
+        return posBasFinal;
+    }
+
 }

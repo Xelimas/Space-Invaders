@@ -155,9 +155,17 @@ public class Scene extends JPanel {
         }
 
         // Affichage de la fin du jeu
-        if(this.vaisseau.isVivant() == false) {
+        if (this.vaisseau.isVivant() == false) {
             g.setFont(afficheTexte);
             g.drawString("Fin de partie !", 110, 100);
+        }
+
+        if (this.groupeAliens.getNombreAliens() == 0) {
+            groupeAliens = new GroupeAliens();
+        }
+
+        if (this.groupeAliens.positionAlienLePlusBas() > Constantes.Y_POS_VAISSEAU) {
+            this.vaisseau.destructionVaisseau();
         }
     }
 
