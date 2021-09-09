@@ -3,6 +3,7 @@ package entites;
 import java.awt.Graphics;
 import java.util.Random;
 
+import jeu.spaceInvadersMain;
 import ressources.Audio;
 import ressources.Chrono;
 import ressources.Constantes;
@@ -182,6 +183,15 @@ public class GroupeAliens {
                         // on enregistre la position de l'alien mort ds le tableau
                         this.tabAlienMort[0] = ligne;
                         this.tabAlienMort[1] = colonne;
+                        if (ligne == 0) {
+                            spaceInvadersMain.scene.score = spaceInvadersMain.scene.score
+                                    + Constantes.VALEUR_ALIEN_HAUT;
+                        } else if (ligne > 0 && ligne < 3) {
+                            spaceInvadersMain.scene.score = spaceInvadersMain.scene.score
+                                    + Constantes.VALEUR_ALIEN_MILIEU;
+                        } else {
+                            spaceInvadersMain.scene.score = spaceInvadersMain.scene.score + Constantes.VALEUR_ALIEN_BAS;
+                        }
                         break;
                     }
                 }

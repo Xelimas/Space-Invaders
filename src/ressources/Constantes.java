@@ -10,6 +10,7 @@ public abstract class Constantes {
 
 
     /******************************** VAISSEAU ********************************/
+    
     // Dimension du vaisseau
     public static final int LARGEUR_VAISSEAU = 39;
     public static final int HAUTEUR_VAISSEAU = 24;
@@ -25,6 +26,7 @@ public abstract class Constantes {
     public static final int LIMITE_DROITE_VAISSEAU = 500;
 
     /******************************** ALIEN ********************************/
+
     // Dimension de l'alien
     public final static int LARGEUR_ALIEN = 33;
     public final static int HAUTEUR_ALIEN = 25;
@@ -44,6 +46,7 @@ public abstract class Constantes {
     public final static int NOMBRE_ALIENS = 50;
 
     /******************************** TIR VAISSEAU ********************************/
+
     // Dimension du tir
     public final static int LARGEUR_TIR_VAISSEAU = 3;
     public final static int HAUTEUR_TIR_VAISSEAU = 13;
@@ -52,6 +55,7 @@ public abstract class Constantes {
     public final static int DY_TIR_VAISSEAU = 2;
 
     /******************************** CHATEAU ********************************/
+
     // Dimension de la brique
     public final static int DIMENSION_BRIQUE = 2;
 
@@ -65,6 +69,7 @@ public abstract class Constantes {
     public final static int ECART_CHATEAU = 42;
 
     /******************************** TIR ALIEN ********************************/
+
     // Dimension du tir
     public static final int LARGEUR_TIR_ALIEN = 5;
     public static final int HAUTEUR_TIR_ALIEN = 15;
@@ -84,6 +89,13 @@ public abstract class Constantes {
     
     // Unité de déplacement de la soucoupe
     public final static int DX_SOUCOUPE = 1;
-    
+
+    /******************************** POINTS ********************************/
+
+    // points attribués pour la destruction des aliens
+    public final static int VALEUR_ALIEN_HAUT = 50;
+    public final static int VALEUR_ALIEN_MILIEU = 40;
+    public final static int VALEUR_ALIEN_BAS = 20;
+    public final static int VALEUR_SOUCOUPE = 100;
 
 }
