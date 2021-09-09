@@ -20,6 +20,7 @@ public class Clavier implements KeyListener {
                 spaceInvadersMain.scene.vaisseau.setDx(-Constantes.DX_VAISSEAU);
             } else if (e.getKeyCode() == 90) { // touche Z (tir du vaisseau)
                 if (spaceInvadersMain.scene.tirVaisseau.isVaisseauTire() == false) {
+                    Audio.playSound("/sons/sonTirVaisseau.wav");
                     spaceInvadersMain.scene.tirVaisseau
                             .setyPos(Constantes.Y_POS_VAISSEAU - Constantes.HAUTEUR_TIR_VAISSEAU);
                     spaceInvadersMain.scene.tirVaisseau

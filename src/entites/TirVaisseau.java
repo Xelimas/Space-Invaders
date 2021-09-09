@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import javax.swing.ImageIcon;
 
 import jeu.spaceInvadersMain;
+import ressources.Audio;
 import ressources.Constantes;
 
 public class TirVaisseau extends Entite {
@@ -63,6 +64,7 @@ public class TirVaisseau extends Entite {
     public boolean tueAlien(Alien alien) {
         if (this.yPos < alien.getyPos() + alien.getHauteur() && this.yPos + this.hauteur > alien.getyPos()
                 && this.xPos + this.largeur > alien.getxPos() && this.xPos < alien.getxPos() + alien.getLargeur()) {
+                    Audio.playSound("/sons/sonAlienMeurt.wav");
             return true;
         } else {
             return false;

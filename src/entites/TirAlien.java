@@ -6,6 +6,7 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 
 import jeu.spaceInvadersMain;
+import ressources.Audio;
 import ressources.Chrono;
 import ressources.Constantes;
 
@@ -122,6 +123,7 @@ public class TirAlien extends Entite {
                 && this.xPos + this.largeur > vaisseau.getxPos()
                 && this.xPos < vaisseau.getxPos() + vaisseau.getLargeur()) {
             this.yPos = 700;
+            Audio.playSound("/sons/sonDestructionVaisseau.wav");
             return true;
         } else {
             return false;

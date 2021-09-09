@@ -1,5 +1,6 @@
 package entites;
 
+import ressources.Audio;
 import ressources.Constantes;
 
 import java.awt.Color;
@@ -129,6 +130,7 @@ public class Chateau extends Entite {
 
     // récapitule les 3 méthodes qui précédent
     public void casseBriques(int xTir) {
+        Audio.playSound("/sons/sonCasseBrique.wav");
         int colonne = this.trouveColonneChateau(xTir);
         this.enleveBriques(trouveBrique(colonne), colonne);
     }
@@ -161,6 +163,7 @@ public class Chateau extends Entite {
 
     // récapitule les 3 méthodes qui précédent
     public void casseBriquesHaut(int xTir) {
+        Audio.playSound("/sons/sonCasseBrique.wav");
         int colonne = this.trouveColonneChateau(xTir);
         this.enleveBriquesHaut(trouveBriqueHaut(colonne), colonne);
     }

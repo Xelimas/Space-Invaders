@@ -3,6 +3,7 @@ package entites;
 import java.awt.Graphics;
 import java.util.Random;
 
+import ressources.Audio;
 import ressources.Chrono;
 import ressources.Constantes;
 
@@ -12,6 +13,7 @@ public class GroupeAliens {
     private Alien tabAlien[][] = new Alien[5][10];
     private boolean vaADroite, pos1;
     private int vitesse;
+    private int compteurSonAlien = 0;
 
     private int[] tabAlienMort = { -1, -1 }; // Emplacement alien mort dans le tableau aliens
 
@@ -159,6 +161,8 @@ public class GroupeAliens {
 
             }
         }
+        this.jouSonAlien();
+        this.compteurSonAlien++;
         if (this.pos1 == true) {
             this.pos1 = false;
         } else {
@@ -211,4 +215,18 @@ public class GroupeAliens {
         }
         return positionAlien;
     }
+
+    private void jouSonAlien() {
+        int compteur = this.compteurSonAlien % 4;
+        if (compteur == 0) {
+            Audio.playSound("/sons/sonAlien1.wav");
+        } else if (compteur == 1) {
+            Audio.playSound("/sons/sonAlien2.wav");
+        } else if (compteur == 2) {
+            Audio.playSound("/sons/sonAlien3.wav");
+        } else {
+            Audio.playSound("/sons/sonAlien4.wav");
+        }
+    }
+
 }
