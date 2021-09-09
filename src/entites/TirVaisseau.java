@@ -64,7 +64,7 @@ public class TirVaisseau extends Entite {
     public boolean tueAlien(Alien alien) {
         if (this.yPos < alien.getyPos() + alien.getHauteur() && this.yPos + this.hauteur > alien.getyPos()
                 && this.xPos + this.largeur > alien.getxPos() && this.xPos < alien.getxPos() + alien.getLargeur()) {
-                    Audio.playSound("/sons/sonAlienMeurt.wav");
+            Audio.playSound("/sons/sonAlienMeurt.wav");
             return true;
         } else {
             return false;
@@ -128,6 +128,17 @@ public class TirVaisseau extends Entite {
                 tabChateaux[tab[0]].casseBriques(tab[1]); // Détruit les briques du château touché
                 this.yPos = -1; // On fait disparaitre le tir et on réactive le canon du vaisseau
             }
+        }
+    }
+
+    public boolean detruitSoucoupe(Soucoupe soucoupe) {
+        if (this.yPos < soucoupe.getyPos() + soucoupe.getHauteur() && this.yPos + this.hauteur > soucoupe.getyPos()
+                && this.xPos + this.largeur > soucoupe.getxPos()
+                && this.xPos < soucoupe.getxPos() + soucoupe.getLargeur()) {
+            this.vaisseauTire = false;
+            return true;
+        } else {
+            return false;
         }
     }
 

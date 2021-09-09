@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 
 import entites.Chateau;
 import entites.GroupeAliens;
+import entites.Soucoupe;
 import entites.TirAlien;
 import entites.TirVaisseau;
 import entites.Vaisseau;
@@ -28,6 +29,8 @@ public class Scene extends JPanel {
 
     public TirAlien tirAlien1, tirAlien2, tirAlien3;
 
+    public Soucoupe soucoupe;
+
     /**** CONSTRUCTEUR ****/
 
     public Scene() {
@@ -42,11 +45,10 @@ public class Scene extends JPanel {
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.addKeyListener(new Clavier());
-        
+
         Thread chronoEcran = new Thread(new Chrono());
         chronoEcran.start();
 
-        
     }
 
     /**** METHODES ****/
@@ -89,7 +91,9 @@ public class Scene extends JPanel {
         if (this.tirAlien1 != null) {
             this.tirAlien1.dessinTirAlien(g2);
             this.tirAlien1.tirAlienDetruitChateau(tabChateaux); // détection contact avec château
-            if(this.tirAlien1.toucheVaisseau(vaisseau) == true) {this.vaisseau.setVivant(false);}
+            if (this.tirAlien1.toucheVaisseau(vaisseau) == true) {
+                this.vaisseau.setVivant(false);
+            }
         }
 
         if (Chrono.compteTours % 750 == 0) {
@@ -98,7 +102,9 @@ public class Scene extends JPanel {
         if (this.tirAlien2 != null) {
             this.tirAlien2.dessinTirAlien(g2);
             this.tirAlien2.tirAlienDetruitChateau(tabChateaux); // détection contact avec château
-            if(this.tirAlien2.toucheVaisseau(vaisseau) == true) {this.vaisseau.setVivant(false);}
+            if (this.tirAlien2.toucheVaisseau(vaisseau) == true) {
+                this.vaisseau.setVivant(false);
+            }
         }
 
         if (Chrono.compteTours % 900 == 0) {
@@ -107,7 +113,27 @@ public class Scene extends JPanel {
         if (this.tirAlien3 != null) {
             this.tirAlien3.dessinTirAlien(g2);
             this.tirAlien3.tirAlienDetruitChateau(tabChateaux); // détection contact avec château
-            if(this.tirAlien3.toucheVaisseau(vaisseau) == true) {this.vaisseau.setVivant(false);}
+            if (this.tirAlien3.toucheVaisseau(vaisseau) == true) {
+                this.vaisseau.setVivant(false);
+            }
+        }
+
+        // dessin de la soucoupe
+        if (Chrono.compteTours % 2500 == 0) {
+            soucoupe = new Soucoupe();
+        }
+        if (this.soucoupe != null) {
+            if (this.soucoupe.getxPos() > 0) {
+                if(this.tirVaisseau.detruitSoucoupe(this.soucoupe) == true) {
+                    this.soucoupe.setDx(0);
+                    this.soucoupe.setVivant(false);
+                    this.soucoupe.musiqueSoucoupe.stop();
+                    this.soucoupe.musiqueDestructionSoucoupe.play();
+                }
+                this.soucoupe.dessinSoucoupe(g2);
+            } else {
+                this.soucoupe = null;
+            }
         }
     }
 
